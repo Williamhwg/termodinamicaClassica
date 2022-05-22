@@ -1,4 +1,5 @@
 #%%
+from locale import normalize
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -12,8 +13,8 @@ Tc = 514.71 # K
 rho_c = 5.93 # mol/dm³
 R = 8.31446262 #J/(mol.K)
 # %%
-T = np.linspace(100,700,100)
-rho = np.linspace(1, 22, 100)
+T = np.linspace(100,700,1000)
+rho = np.linspace(1, 22, 1000)
 tau = Tc/T
 delta = rho/rho_c
 # %%
@@ -38,5 +39,14 @@ plt.xlabel('Density (mol/dm³)')
 plt.ylabel('Temperature (K)')
 plt.colorbar()
 # %%
+plt.contourf(xdelta*rho_c, Tc/xtau, np.gradient(helm(xdelta,xtau))[0], levels=50, cmap='RdBu')
+plt.colorbar()
+# %%
+np.gradient(np.gradient(helm(xdelta,xtau))[0])[0]
+# %%
+plt.contour(xdelta*rho_c, Tc/xtau,np.gradient(np.gradient(helm(xdelta,xtau))[0])[0] , levels=100, cmap='RdBu')
+plt.xlabel('Density (mol/dm³)')
+plt.ylabel('Temperature (K)')
+plt.colorbar()
 
 # %%
