@@ -12,8 +12,8 @@ Tc = 514.71 # K
 rho_c = 5.93 # mol/dm³
 R = 8.31446262 #J/(mol.K)
 # %%
-T = np.linspace(100,700,4000)
-rho = np.linspace(1, 22, 4000)
+T = np.linspace(100,700,1000)
+rho = np.linspace(1, 22, 1000)
 tau = Tc/T
 delta = rho/rho_c
 # %%
@@ -41,9 +41,9 @@ plt.colorbar()
 plt.contourf(xdelta*rho_c, Tc/xtau, np.gradient(helm(xdelta,xtau))[0], levels=50, cmap='RdBu')
 plt.colorbar()
 # %%
-np.gradient(np.gradient(helm(xdelta,xtau))[0])[0]
+np.gradient(np.gradient(helm(xdelta,xtau))[-1])[-1]
 # %%
-plt.contour(xdelta*rho_c, Tc/xtau,np.gradient(np.gradient(helm(xdelta,xtau))[0])[0] , levels=100, cmap='RdBu')
+plt.contour(xdelta*rho_c, Tc/xtau,np.gradient(np.gradient(helm(xdelta,xtau))[-1])[-1] , levels=100, cmap='RdBu')
 plt.xlabel('Density (mol/dm³)')
 plt.ylabel('Temperature (K)')
 plt.colorbar()
@@ -52,6 +52,10 @@ plt.colorbar()
 hessians = np.asarray(np.gradient(np.gradient(helm(xdelta,xtau))))
 hessians.shape
 hessians[1:].shape
+# plt.contour(xdelta*rho_c, Tc/xtau, hessians[0][0] , levels=100, cmap='RdBu')
+# plt.xlabel('Density (mol/dm³)')
+# plt.ylabel('Temperature (K)')
+# plt.colorbar()
 # %%
 for d in range(50):
     plt.plot(T, helm(d, tau))
