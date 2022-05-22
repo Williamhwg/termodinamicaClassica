@@ -2,8 +2,6 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib import cm
-from matplotlib.ticker import LinearLocator
 # %%
 table18 = pd.read_csv('table18.txt', index_col = 'i', sep=' ', dtype={'xi': 'float', 'yi': 'float'})
 table19 = pd.read_csv('table19.txt', index_col = 'i', sep=' ', dtype={'Ni': 'float', 'ti': 'float', 'di': 'float', 'li': 'float', 'hi': 'float','bi': 'float', 'gi': 'float', 'ei': 'float'})
@@ -34,11 +32,11 @@ def alpha_r(delta, tau):
 
 def helm(delta, tau):
     return alpha_0(delta, tau) + alpha_r(delta,tau)
-#%%
-np.cumsum([[1, 2],[3,4]], axis=1)
 # %%
-plt.contourf(xdelta*rho_c, Tc/xtau, helm(xdelta,xtau), levels=40, cmap='RdBu')
+plt.contourf(xdelta*rho_c, Tc/xtau, helm(xdelta,xtau), levels=50, cmap='RdBu')
 plt.xlabel('Density (mol/dm³)')
 plt.ylabel('Temperature (K)')
 plt.colorbar()
+# %%
+
 # %%
