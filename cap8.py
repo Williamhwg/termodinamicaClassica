@@ -1,5 +1,4 @@
 #%%
-from locale import normalize
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -13,8 +12,8 @@ Tc = 514.71 # K
 rho_c = 5.93 # mol/dm³
 R = 8.31446262 #J/(mol.K)
 # %%
-T = np.linspace(100,700,1000)
-rho = np.linspace(1, 22, 1000)
+T = np.linspace(100,700,4000)
+rho = np.linspace(1, 22, 4000)
 tau = Tc/T
 delta = rho/rho_c
 # %%
@@ -49,4 +48,11 @@ plt.xlabel('Density (mol/dm³)')
 plt.ylabel('Temperature (K)')
 plt.colorbar()
 
+# %%
+hessians = np.asarray(np.gradient(np.gradient(helm(xdelta,xtau))))
+hessians.shape
+hessians[1:].shape
+# %%
+for d in range(50):
+    plt.plot(T, helm(d, tau))
 # %%
